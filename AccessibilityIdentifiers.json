@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "java": {
+    "package": "com.natgeo",
+    "base": "AccessibilityIdentifiers"
+  },
+  "swift": {
+    "base": "AccessibilityIdentifiers"
+  },
+  // ids.xml
+  "xml": {
+    "base": "ids"
+  },
+  "FeedEntry": {
+    "Title": {
+      "id": "feed_entry"
+    },
+    "Summary": {
+      "id": "feed_title"
+    },
+    "Attribute": {
+      "id": "feed_attribute"
+    }
+  }
+}
