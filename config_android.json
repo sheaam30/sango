@@ -1,10 +1,10 @@
 {
 	"input_assets": "./",
 	"inputs": [
-		"AccessibilityIdentifiers.json"
+		"inputs/AccessibilityIdentifiers.json"
 	],
-	"out_source": "../ids.xml",
+	"out_source": "output/ids.xml",
 	"out_assets": "",
-	"type": "java",
+	"type": "xml",
 	"input_assets_tag": "~"
 }

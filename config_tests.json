@@ -1,9 +1,9 @@
 {
 	"input_assets": "./",
 	"inputs": [
-		"AccessibilityIdentifiers.json"
+		"inputs/AccessibilityIdentifiers.json"
 	],
-	"out_source": "../AccessibilityIdentifiers.java",
+	"out_source": "output/AccessibilityIdentifiers.java",
 	"out_assets": "",
 	"type": "java",
 	"input_assets_tag": "~"

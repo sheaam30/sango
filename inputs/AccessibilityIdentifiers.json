@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "java": {
+    "package": "com.natgeo",
+    "base": "AccessibilityIdentifiers"
+  },
+  "swift": {
+    "base": "AccessibilityIdentifiers"
+  },
+  "FeedEntry": {
+    "Title": {
+      "id": "feed_entry"
+    },
+    "Summary": {
+      "id": "feed_title"
+    },
+    "Attribute": {
+      "id": "feed_attribute"
+    }
+  },
+
+  "Home": { 
+    "ForYouScreen": {
+        "id": "screen_foryou",
+        "TabBarItem":  {
+            "id": "button_nav_foryou"
+        }
+    },
+    "ReadScreen": {
+        "id": "screen_read",
+        
+        "TabBarItem": {
+            "id": "button_nav_read",
+      
+            "SettingsItem": {
+                "id": "settings_reading_options"
+            }
+        }
+    },
+    "LookScreen": {
+        "id": "screen_look",
+        
+        "TabBarItem": {
+            "id": "button_nav_look"
+        }
+    },
+    "WatchScreen": {
+        "id": "screen_watch",
+        
+        "TabBarItem": {
+            "id": "button_nav_watch"
+        }
+    }
+},
+
+"Magazine": {
+    "TabBarItem": {
+        "id": "button_nav_magazine",
+
+        "Current": {
+            "id": "magazine_current_button"
+        },
+        "Classic":  {
+            "id": "magazine_classic_button"
+        }
+
+    },
+    
+    "Screen": {
+        
+        "id": "screen_magazine",
+        
+        "Label": {
+            "id": "title_magazine"
+        }
+    }
+},
+
+"Shows": {
+    "TabBarItem": {
+        "id": "button_nav_shows"
+    },
+
+    "Categories": {
+        "All": {
+            "id": "all_shows_label"
+        },
+        "Featured": {
+            "id": "featured_label"
+        },
+        "JustAdded": {
+            "id": "just_added_label"
+        }
+    },
+
+    "Screen": {
+        "id": "screen_shows",
+
+        "BackButton": {
+            "id": "back_button"
+        },
+        "Items": {
+            "id": "show_items",
+    
+            "Carousel": {
+                "Pager": {
+                    "id": "pager"
+                },
+                "Tabs": {
+                    "id": "tabs"
+                }
+            },
+            "TabBarItem": {
+                "id": "button_nav_live_tv"
+            },
+            "LiveTvScreen": {
+                "id": "screen_live",
+
+                "Label": {
+                    "id": "title_live_tv"
+                }
+            }
+        }
+    }
+},
+
+"SearchScreen": {
+    "id": "screen_search",
+
+    "TabBarItem": {
+        "id": "button_nav_search"
+    },
+    "Trending": {
+        "id": "title_trending"
+    },
+    "Icon": {
+        "id": "search_icon"
+    },
+    "Bar": {
+        "id": "search_bar"
+    }
+},
+
+"SettingsScreen": {
+    "id": "screen_settings",
+    
+    "TabBarItem": {
+        "id": "button_nav_settings"
+    },
+    "Label": {
+        "id": "title_settings"
+    },
+    
+    "HistoryScreen": {
+        "id": "screen_history",
+        
+        "Label": {
+            "id": "title_your_history"
+        },
+        "TabBarItem": {
+            "id": "button_nav_history"
+        }
+    }
+},
+
+"ExitButton": {
+    "id": "button_nav_close"
+}
+}

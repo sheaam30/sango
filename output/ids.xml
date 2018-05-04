@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generated with Sango, by Afero.io -->
+<resources>
+	 <item name="button_nav_close" type="id"/>
+	 <item name="feed_attribute" type="id"/>
+	 <item name="feed_title" type="id"/>
+	 <item name="feed_entry" type="id"/>
+	 <item name="button_nav_foryou" type="id"/>
+	 <item name="screen_foryou" type="id"/>
+	 <item name="button_nav_look" type="id"/>
+	 <item name="screen_look" type="id"/>
+	 <item name="settings_reading_options" type="id"/>
+	 <item name="button_nav_read" type="id"/>
+	 <item name="screen_read" type="id"/>
+	 <item name="button_nav_watch" type="id"/>
+	 <item name="screen_watch" type="id"/>
+	 <item name="title_magazine" type="id"/>
+	 <item name="screen_magazine" type="id"/>
+	 <item name="magazine_classic_button" type="id"/>
+	 <item name="magazine_current_button" type="id"/>
+	 <item name="button_nav_magazine" type="id"/>
+	 <item name="search_bar" type="id"/>
+	 <item name="search_icon" type="id"/>
+	 <item name="button_nav_search" type="id"/>
+	 <item name="title_trending" type="id"/>
+	 <item name="screen_search" type="id"/>
+	 <item name="title_your_history" type="id"/>
+	 <item name="button_nav_history" type="id"/>
+	 <item name="screen_history" type="id"/>
+	 <item name="title_settings" type="id"/>
+	 <item name="button_nav_settings" type="id"/>
+	 <item name="screen_settings" type="id"/>
+	 <item name="all_shows_label" type="id"/>
+	 <item name="featured_label" type="id"/>
+	 <item name="just_added_label" type="id"/>
+	 <item name="back_button" type="id"/>
+	 <item name="pager" type="id"/>
+	 <item name="tabs" type="id"/>
+	 <item name="title_live_tv" type="id"/>
+	 <item name="screen_live" type="id"/>
+	 <item name="button_nav_live_tv" type="id"/>
+	 <item name="show_items" type="id"/>
+	 <item name="screen_shows" type="id"/>
+	 <item name="button_nav_shows" type="id"/>
+</resources>

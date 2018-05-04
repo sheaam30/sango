@@ -1,9 +1,9 @@
 {
 	"input_assets": "./",
 	"inputs": [
-		"AccessibilityIdentifiers.json"
+		"inputs/AccessibilityIdentifiers.json"
 	],
-	"out_source": "../Waterpik/SharedConstants/AccessibilityIdentifiers.swift",
+	"out_source": "output/AccessibilityIdentifiers.swift",
 	"out_assets": "",
 	"type": "swift",
 	"input_assets_tag": "~"

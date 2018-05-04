@@ -212,11 +212,11 @@ class App
     // when walking through the constants, and write them out last
     var colorsFound:[String:Any] = [:]
 
-    var idsFound:[String:Any] = [:]
-
     // because Android dimentions are stored in an external file, we collect them
     // when walking through the constants, and write them out last
     var androidDimens:[String:Any] = [:]
+    
+    var identifiers = [String]()
     
     var enumsFound: [String:Any] = [:]
 
@@ -547,6 +547,9 @@ class App
             }
             sangoFile += "/Sango.js"
         }
+        else if (type == .xml) {
+            sangoFile += "/Sango.js"
+        }
 
         saveString(outputStr, file: sangoFile)
     }
@@ -631,7 +634,6 @@ class App
         }
     }
     
-    
     func writeAndroidDimens() -> Void {
         if (androidDimens.count > 0) {
             var destPath = outputAssetFolder! + "/res/values"
@@ -644,6 +646,21 @@ class App
                 if let dimen = androidDimens[key] as? String {
                     outputStr.append("\t<dimen name=\"\(key)\">\(dimen)</dimen>\n")
                 }
+            }
+            outputStr.append("</resources>\n")
+            saveString(outputStr, file: destPath)
+        }
+    }
+    
+    func writeIdentifiers() -> Void {
+        if (identifiers.count > 0) {
+            let destPath = outputClassFile!
+            Utils.createFolderForFile(destPath)
+
+            var outputStr = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!-- Generated with Sango, by Afero.io -->\n"
+            outputStr.append("<resources>\n")
+            for identifier in identifiers {
+                outputStr.append("\t <item name=\(identifier) type=\"id\"/>\n")
             }
             outputStr.append("</resources>\n")
             saveString(outputStr, file: destPath)
@@ -802,7 +819,7 @@ class App
 
     func writeConstants(_ name: String, value: Any, type: LangType, level: Int = 0) -> String {
         var outputString = ""
-        // print("writeConstants: \(name) :: \(value)")
+//        Utils.always("writeConstants: \n\(name) \n\(value)\n\n")
         if (reservedWords.contains(name.lowercased())) {
             Utils.error("Error: Class '\(name)' is a reserved word and has to be changed")
             exit(-1)
@@ -1054,7 +1071,105 @@ class App
             }
         }
         else if (type == .xml) {
+            var skipClass = true
+            var tabs = ""
+            var outputClassString = tabs
+            if let constantsDictionary = value as? Dictionary<String, Any> {
+                for (key, value) in Array(constantsDictionary).sorted(by: {$0.0 < $1.0}) {
+                    if (reservedWords.contains(key.lowercased())) {
+                        Utils.error("Error: Constant '\(name).\(key)' is a reserved word and has to be changed")
+                        exit(-1)
+                    }
+                    if ((value as AnyObject).className.contains("Dictionary")) {
+                        var tabs = ""
+                        for _ in 0..<level {
+                            tabs.append("\t")
+                        }
+                        outputClassString.append(writeConstants(key, value: value, type: type, level: level + 1))
+                        outputClassString.append("\n")
+                        skipClass = false
+                    } else {
+                        let strValue = String(describing: value)
+                        var lineValue = parseJavaConstant(key, value: value)
+                        
+                        switch lineValue.type {
+                        default:
+                            var tabs = ""
+                            for _ in 0..<level {
+                                tabs.append("\t")
+                            }
+                            outputString.append("")
+                            identifiers.append(lineValue.output)
+                            skipClass = false
+                        }
+                    }
+                }
+            }
+            else if let constantsArray = value as? Array<Any> {
+                let lastItm = constantsArray.count - 1
+                var ending = false
+                // ok we have an array of strings, int, floats, we have to figure out a type before hand for Java
+                var type:ValueType = .String
+                if (hasArrayFloats(value)) {
+                    type = .Float
+                }
+                else if (hasArrayInts(value)) {
+                    type = .Int
+                }
+                else {
+                    for (index, itm) in constantsArray.enumerated() {
+                        let lineValue = parseJavaConstant(String(index), value: itm)
+                        if (lineValue.type == .Color) {
+                            type = .Color
+                            break
+                        }
+                        if (lineValue.type == .CustomEnum) {
+                            type = .CustomEnum
+                            outputString.append("public static final \(lineValue.results.enumType.snakeCaseToCamelCase()) \(name)[] = {\n\t")
+                            break
+                        }
+                    }
+                }
+                
+                if constantsArray.count > 0 {
+                    for (index, itm) in constantsArray.enumerated() {
+                        let lineValue = parseJavaConstant(String(index), value: itm)
+                        switch lineValue.type {
+                        case .Color:
+                            // ok, we have a color, so we're going to store it
+                            let colorKey = name + "_\(index)"
+                            colorsFound[colorKey.lowercased()] = String(describing: itm)
+                        case .Dimen:
+                            let dimensKey = name + "_\(index)"
+                            androidDimens[dimensKey.lowercased()] = String(describing: itm)
+                        default:
+                            ending = true
+                            outputString.append(lineValue.output);
+                            if (index < lastItm) {
+                                outputString.append(",\n\t")
+                            }
+                        }
+                    }
+                }
+                else {
+                    ending = true
+                }
+                if (ending) {
+                    outputString.append("\n};");
+                }
+            }
             
+//            if (skipClass == false) {
+//                var tabs = ""
+//                for _ in 0..<level {
+//                    tabs.append("\t")
+//                }
+//                outputString.append(tabs + "public static final class ")
+//                outputString.append(name + " {\n")
+//                outputString.append(outputClassString)
+//                outputString.append(tabs + "}")
+//                outputString.append("\n\n")
+//            }
         }
         else {
             Utils.error("Error: invalid output type")
@@ -1822,6 +1937,7 @@ class App
     
     func consume(_ data: Dictionary <String, Any>, type: LangType, langOutputFile: String) -> Void
     {
+        Utils.always("Creating \(langOutputFile)")
         Utils.createFolderForFile(langOutputFile)
 
         // process first pass keys
@@ -1971,6 +2087,7 @@ class App
         }
         
         if (completeOutput) {
+            
             var outputStr = "/* Generated with Sango, by Afero.io */\n\n"
             if (enumsFound.isEmpty == false) {
                 let line = writeEnums(enumsFound, type: type)
@@ -2023,10 +2140,11 @@ class App
                     genString.append("\nmodule.exports = \(baseClass);")
                 }
                 outputStr.append(genString + "\n")
+                Utils.always("Writing to \(langOutputFile)")
                 _ = saveString(outputStr, file: langOutputFile)
             }
             let langOutputFolder = langOutputFile.pathOnlyComponent()
-            writeSangoExtras(type, filePath: langOutputFolder)
+//            writeSangoExtras(type, filePath: langOutputFolder)
             if (type == .java) {
                 let destPath = outputAssetFolder! + "/res/values"
                 writeExternalColors(destPath)
@@ -2039,7 +2157,7 @@ class App
                 writeExternalColors(langOutputFolder)
             }
             else if (type == .xml) {
-                
+                writeIdentifiers()
             }
         }
     }
@@ -2176,6 +2294,7 @@ class App
                     validate(validateInputs!, type: .java)
                     validate(validateInputs!, type: .javascript)
                     validate(validateInputs!, type: .nodejs)
+                    validate(validateInputs!, type: .xml)
                 }
                 else {
                     validate(validateInputs!, type: validateLang)
@@ -2228,6 +2347,7 @@ class App
         }
 
         if (compileType == .unset) {
+
             if (findOption(args, option: optJava)) {
                 compileType = .java
             }
