@@ -1488,7 +1488,7 @@ class App
         }
     }
     private func findGroups(_ line: String, regexPattern: String) -> [Group] {
-        let regex = try! NSRegularExpression(pattern: regexPattern,
+        let regex = try NSRegularExpression(pattern: regexPattern,
                                                  options: .caseInsensitive)
         let matches = regex.matches(in: line, range: NSMakeRange(0, line.utf16.count))
         
