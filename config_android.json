@@ -3,7 +3,7 @@
 	"inputs": [
 		"inputs/AccessibilityIdentifiers.json"
 	],
-	"out_source": "android/ids.xml",
+	"out_source": "android/values/ids.xml",
 	"out_assets": "",
 	"type": "xml",
 	"input_assets_tag": "~"
