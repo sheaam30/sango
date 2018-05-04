@@ -4,6 +4,7 @@
 	 <item name="button_nav_close" type="id"/>
 	 <item name="feed_attribute" type="id"/>
 	 <item name="feed_title" type="id"/>
+	 <item name="feed_title" type="id"/>
 	 <item name="feed_entry" type="id"/>
 	 <item name="button_nav_foryou" type="id"/>
 	 <item name="screen_foryou" type="id"/>

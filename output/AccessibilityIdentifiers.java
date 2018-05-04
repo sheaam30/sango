@@ -13,8 +13,9 @@ public final class AccessibilityIdentifiers {
 			public static final String ID = "feed_title";
 		}
 		public static final class Title {
-			public static final String ID = "feed_entry";
+			public static final String ID = "feed_title";
 		}
+		public static final String ID = "feed_entry";
 	}
 	public static final class Home {
 		public static final class ForYouScreen {

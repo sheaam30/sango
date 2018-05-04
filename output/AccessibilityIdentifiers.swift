@@ -13,8 +13,9 @@ public struct AccessibilityIdentifiers {
 			public static let id = "feed_title"
 		}
 		public struct Title {
-			public static let id = "feed_entry"
+			public static let id = "feed_title"
 		}
+		public static let id = "feed_entry"
 	}
 	public struct Home {
 		public struct ForYouScreen {
