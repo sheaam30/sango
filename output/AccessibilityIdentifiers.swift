@@ -10,7 +10,7 @@ public struct AccessibilityIdentifiers {
 			public static let id = "feed_attribute"
 		}
 		public struct Summary {
-			public static let id = "feed_title"
+			public static let id = "feed_summary"
 		}
 		public struct Title {
 			public static let id = "feed_title"

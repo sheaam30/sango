@@ -10,7 +10,7 @@ public final class AccessibilityIdentifiers {
 			public static final String ID = "feed_attribute";
 		}
 		public static final class Summary {
-			public static final String ID = "feed_title";
+			public static final String ID = "feed_summary";
 		}
 		public static final class Title {
 			public static final String ID = "feed_title";
