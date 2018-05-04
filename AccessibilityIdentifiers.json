@@ -7,10 +7,6 @@
   "swift": {
     "base": "AccessibilityIdentifiers"
   },
-  // ids.xml
-  "xml": {
-    "base": "ids"
-  },
   "FeedEntry": {
     "Title": {
       "id": "feed_entry"

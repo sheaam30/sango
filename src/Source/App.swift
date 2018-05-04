@@ -76,13 +76,14 @@ let keyJava = "java"
 let keySwift = "swift"
 let keyJavascript = "javascript"
 let keyNodeJS = "nodejs"
+let keyXML = "xml"
 let keyPrint = "print"
 let firstPassIgnoredKeys = [keyCopied, keyIOSAppIcon, keyAndroidAppIcon, keyAppIcon,
                                     keyFonts, keyFontRoot, keySchemaVersion, keyAndroidLayout, keyEnums,
                                     keyImagesScaled, keyImagesScaledIos, keyImagesScaledAndroid,
                                     keyImagesScaledUp, keyImagesScaledIosUp, keyImagesScaledAndroidUp,
                                     keyImages, keyImagesIos, keyImagesAndroid, keyLocale,
-                                    keyJava, keySwift, keyJavascript, keyNodeJS, keyGlobalTint,
+                                    keyJava, keySwift, keyJavascript, keyNodeJS, keyXML, keyGlobalTint,
                                     keyGlobalIosTint, keyGlobalAndroidTint, keyPrint]
 
 enum LangType {
@@ -91,6 +92,7 @@ enum LangType {
     case swift
     case javascript
     case nodejs
+    case xml
 }
 
 enum AssetType {
@@ -127,6 +129,7 @@ let optJava = "-java"
 let optSwift = "-swift"
 let optJavascript = "-javascript"
 let optNodeJS = "-nodejs"
+let optXML = "-xml"
 let optOutAssets = "-out_assets"
 let optInputAssetsTag = "-input_assets_tag"
 let optVerbose = "-verbose"
@@ -208,6 +211,8 @@ class App
     // because Android and Javascript colors are stored in an external file, we collect them 
     // when walking through the constants, and write them out last
     var colorsFound:[String:Any] = [:]
+
+    var idsFound:[String:Any] = [:]
 
     // because Android dimentions are stored in an external file, we collect them
     // when walking through the constants, and write them out last
@@ -1048,6 +1053,9 @@ class App
                 outputString.append("},")
             }
         }
+        else if (type == .xml) {
+            
+        }
         else {
             Utils.error("Error: invalid output type")
             exit(-1)
@@ -1868,7 +1876,7 @@ class App
             }
         }
         
-        // everything else is converted to Java, Swift classes
+        // everything else is converted to Java, XML, Swift files
         var genString = ""
         for (key, value) in Array(data).sorted(by: {$0.0 < $1.0}) {
             if (firstPassIgnoredKeys.contains(key) == false) {
@@ -1985,6 +1993,9 @@ class App
                         outputStr.append("package \(package);\n")
                     }
                 }
+                else if (type == .xml) {
+                    outputStr.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>")
+                }
 
                 if (baseClass.isEmpty == false) {
                     genString = insertTabPerLine(genString)
@@ -1999,6 +2010,10 @@ class App
                     }
 
                     genString.append("\n}")
+                }
+                else if (baseClass.isEmpty == true && type == .xml) {
+                    outputStr.append("<resources>")
+                    genString.append("</resources>")
                 }
                 else {
                     Utils.error("Error: missing base class")
@@ -2022,6 +2037,9 @@ class App
             }
             else if (type == .javascript || type == .nodejs) {
                 writeExternalColors(langOutputFolder)
+            }
+            else if (type == .xml) {
+                
             }
         }
     }
@@ -2195,6 +2213,9 @@ class App
                 else if (type == keyNodeJS) {
                     compileType = .nodejs
                 }
+                else if (type == keyXML) {
+                    compileType = .xml
+                }
             }
             else {
                 exit(-1)
@@ -2219,8 +2240,11 @@ class App
             else if (findOption(args, option: optNodeJS)) {
                 compileType = .nodejs
             }
+            else if (findOption(args, option: optXML)) {
+                compileType = .xml
+            }
             else {
-                Utils.error("Error: need either \(optSwift) \(optJava) \(optJavascript) \(optNodeJS)")
+                Utils.error("Error: need either \(optSwift) \(optJava) \(optJavascript) \(optNodeJS) \(optXML)")
                 exit(-1)
             }
         }

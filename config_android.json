@@ -3,7 +3,7 @@
 	"inputs": [
 		"AccessibilityIdentifiers.json"
 	],
-	"out_source": "ids.xml",
+	"out_source": "../ids.xml",
 	"out_assets": "",
 	"type": "java",
 	"input_assets_tag": "~"

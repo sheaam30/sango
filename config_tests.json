@@ -3,7 +3,7 @@
 	"inputs": [
 		"AccessibilityIdentifiers.json"
 	],
-	"out_source": "../UIAutomation/src/main/java/com/waterpik/challenge/AccessibilityIdentifiers.java",
+	"out_source": "../AccessibilityIdentifiers.java",
 	"out_assets": "",
 	"type": "java",
 	"input_assets_tag": "~"
