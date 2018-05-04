@@ -3,7 +3,7 @@
 	"inputs": [
 		"inputs/AccessibilityIdentifiers.json"
 	],
-	"out_source": "output/AccessibilityIdentifiers.java",
+	"out_source": "test/AccessibilityIdentifiers.java",
 	"out_assets": "",
 	"type": "java",
 	"input_assets_tag": "~"

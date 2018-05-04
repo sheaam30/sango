@@ -3,7 +3,7 @@
 	"inputs": [
 		"inputs/AccessibilityIdentifiers.json"
 	],
-	"out_source": "output/AccessibilityIdentifiers.swift",
+	"out_source": "ios/AccessibilityIdentifiers.swift",
 	"out_assets": "",
 	"type": "swift",
 	"input_assets_tag": "~"
