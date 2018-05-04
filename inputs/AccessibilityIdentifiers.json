@@ -8,8 +8,10 @@
     "base": "AccessibilityIdentifiers"
   },
   "FeedEntry": {
+    "id": "feed_entry",
+
     "Title": {
-      "id": "feed_entry"
+      "id": "feed_title"
     },
     "Summary": {
       "id": "feed_title"
